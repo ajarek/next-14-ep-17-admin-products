@@ -20,7 +20,7 @@ const ProductsTable =async () => {
     <Table>
     <TableCaption>List of products</TableCaption>
     <TableHeader>
-      <TableRow className="bg-blue-200">
+      <TableRow className="bg-blue-100">
         <TableHead className="w-[100px]">Image</TableHead>
         <TableHead>Name</TableHead>
         <TableHead>Price</TableHead>

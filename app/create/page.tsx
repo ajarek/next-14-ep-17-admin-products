@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from "@/components/ui/label"
+import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
@@ -17,7 +17,6 @@ const userSchema = z.object({
   rating: z.string(),
 })
 const Page = () => {
-  
   async function create(formData: FormData) {
     'use server'
     const productData = userSchema.parse({
@@ -27,54 +26,60 @@ const Page = () => {
       rating: formData.get('rating'),
     })
     if (!productData) {
-      
       return { message: 'Form data is not valid' }
     }
-   
-    
+    try {
       await dbConnect()
       const product = new ProductModel(productData)
-      console.log(product);
-      
+
       await product.save()
       revalidatePath('/')
-      redirect('/')
       return { message: `Created product ${productData.name}` }
-    
-   
-    
+    } catch {
+      return { message: 'Failed to create product' }
+    } finally {
+      redirect('/')
+    }
   }
   return (
-    <form action={create} className='p-24 flex flex-col justify-evenly gap-4'>
-      <Label htmlFor="image">Image Address</Label>
+    <form
+      action={create}
+      className='p-24 flex flex-col justify-evenly gap-4'
+    >
+      <Label htmlFor='image'>Image Address</Label>
       <Input
         type='text'
         name='image'
         required
         placeholder='https://freepngimg.com/thumb/tshirt/20-t-shirt-png-image-thumb.png'
       />
-       <Label htmlFor="name">Product Name</Label>
+      <Label htmlFor='name'>Product Name</Label>
       <Input
         type='text'
         name='name'
         required
         placeholder='Shirt'
       />
-       <Label htmlFor="price">Product Price $</Label>
+      <Label htmlFor='price'>Product Price $</Label>
       <Input
         type='text'
         name='price'
         required
         placeholder='520.25'
       />
-       <Label htmlFor="rating">Rating</Label>
+      <Label htmlFor='rating'>Rating</Label>
       <Input
         type='text'
         name='rating'
         required
         placeholder='⭐⭐⭐⭐⭐'
       />
-      <Button className='bg-green-400 text-lg' type='submit'>Submit</Button>
+      <Button
+        className='bg-green-400 text-lg'
+        type='submit'
+      >
+        Submit
+      </Button>
     </form>
   )
 }
