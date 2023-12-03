@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from "@/components/ui/label"
 import { revalidatePath } from 'next/cache'
-
+import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import { z } from 'zod'
 import dbConnect from '@/lib/db-connect'
@@ -17,6 +17,7 @@ const userSchema = z.object({
   rating: z.string(),
 })
 const Page = () => {
+  
   async function create(formData: FormData) {
     'use server'
     const productData = userSchema.parse({
@@ -37,6 +38,7 @@ const Page = () => {
       
       await product.save()
       revalidatePath('/')
+      redirect('/')
       return { message: `Created product ${productData.name}` }
     
    

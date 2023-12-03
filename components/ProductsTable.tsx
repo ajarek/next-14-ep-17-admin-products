@@ -8,50 +8,47 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from "next/image"
+import dbConnect from '@/lib/db-connect'
+import ProductModel, { Product } from '@/lib/product-model'
 
-
-const ProductsTable = () => {
+const ProductsTable =async () => {
+  await dbConnect()
+  const products = (await ProductModel.find({}).sort({
+    _id: -1,
+  })) as Product[]
   return (
     <Table>
     <TableCaption>List of products</TableCaption>
     <TableHeader>
-      <TableRow>
+      <TableRow className="bg-blue-200">
         <TableHead className="w-[100px]">Image</TableHead>
         <TableHead>Name</TableHead>
         <TableHead>Price</TableHead>
         <TableHead className="text-center">Rating</TableHead>
-        <TableHead className="text-right">Action</TableHead>
+        <TableHead className="text-center">Action</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
-      <TableRow>
+      {products.length === 0 ? <TableCell colSpan={5}>No product found</TableCell>
+      :
+      products.map((product: Product) => (
+      <TableRow key={product._id}>
         <TableCell className="font-medium">
           <Image
-          src={'/images/shirt1.jpg'}
+          src={product.image}
           alt="shirt"
           width={60}
           height={73}
           />
         </TableCell>
-        <TableCell>Shirt</TableCell>
-        <TableCell>$50.00</TableCell>
-        <TableCell className="text-center">⭐⭐⭐⭐⭐</TableCell>
-        <TableCell className="text-right">Delete</TableCell>
+        <TableCell>{product.name}</TableCell>
+        <TableCell>{product.price} $</TableCell>
+        <TableCell className="text-center">{product.rating}</TableCell>
+        <TableCell className="text-center text-xl cursor-pointer">🗑️</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell className="font-medium">
-          <Image
-          src={'/images/shirt2.jpg'}
-          alt="shirt"
-          width={60}
-          height={73}
-          />
-        </TableCell>
-        <TableCell>Shirt</TableCell>
-        <TableCell>$40.00</TableCell>
-        <TableCell className="text-center">⭐⭐⭐⭐</TableCell>
-        <TableCell className="text-right">Delete</TableCell>
-      </TableRow>
+      )
+      )}
+      
     </TableBody>
   </Table>
   
