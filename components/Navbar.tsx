@@ -17,7 +17,7 @@ import { Button } from './ui/button'
 
 const Navbar = () => {
   return (
-    <NavigationMenu className='bg-red-500 min-w-full flex justify-between items-center p-2'>
+    <NavigationMenu className='bg-indigo-400 min-w-full flex max-sm:flex-wrap max-sm:justify-center max-sm:gap-2 justify-between items-center p-2'>
       <Link
         href='/'
         legacyBehavior

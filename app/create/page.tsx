@@ -1,50 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
-import { z } from 'zod'
-import dbConnect from '@/lib/db-connect'
-import ProductModel from '@/lib/product-model'
+import { create } from '@/lib/actions'
+
 export const metadata: Metadata = {
   title: 'Create Products',
 }
-const userSchema = z.object({
-  image: z.string(),
-  name: z.string(),
-  price: z.string(),
-  rating: z.string(),
-})
-const Page = () => {
-  async function create(formData: FormData) {
-    'use server'
-    const productData = userSchema.parse({
-      image: formData.get('image'),
-      name: formData.get('name'),
-      price: formData.get('price'),
-      rating: formData.get('rating'),
-    })
-    if (!productData) {
-      return { message: 'Form data is not valid' }
-    }
-    try {
-      await dbConnect()
-      const product = new ProductModel(productData)
 
-      await product.save()
-      revalidatePath('/')
-      return { message: `Created product ${productData.name}` }
-    } catch {
-      return { message: 'Failed to create product' }
-    } finally {
-      redirect('/')
-    }
-  }
+const Page = () => {
   return (
     <form
       action={create}
-      className='p-24 flex flex-col justify-evenly gap-4'
+      className='p-24 max-sm:px-2 max-sm:py-4 flex flex-col justify-evenly gap-4'
     >
       <Label htmlFor='image'>Image Address</Label>
       <Input
@@ -75,7 +43,7 @@ const Page = () => {
         placeholder='⭐⭐⭐⭐⭐'
       />
       <Button
-        className='bg-green-400 text-lg'
+        className='bg-indigo-600 text-lg'
         type='submit'
       >
         Submit

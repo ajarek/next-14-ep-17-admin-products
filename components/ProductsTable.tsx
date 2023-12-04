@@ -23,12 +23,12 @@ const ProductsTable = async () => {
     <Table>
       <TableCaption>List of products</TableCaption>
       <TableHeader>
-        <TableRow className='bg-blue-100'>
-          <TableHead className='w-[100px]'>Image</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead className='text-center'>Rating</TableHead>
-          <TableHead className='text-center'>Action</TableHead>
+        <TableRow >
+          <TableHead className='w-[100px] font-bold'>Image</TableHead>
+          <TableHead className='font-bold '>Name</TableHead>
+          <TableHead className='font-bold '>Price</TableHead>
+          <TableHead className='text-center font-bold'>Rating</TableHead>
+          <TableHead className='text-center font-bold'>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -47,7 +47,7 @@ const ProductsTable = async () => {
               </TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell>{product.price} $</TableCell>
-              <TableCell className='text-center'>{product.rating}</TableCell>
+              <TableCell className='text-center max-sm:text-[10px]'>{product.rating}</TableCell>
               <TableCell className='text-center text-xl cursor-pointer'>
                 <DeleteForm
                   _id={product._id.toString()}

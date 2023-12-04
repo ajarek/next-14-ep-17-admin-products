@@ -29,7 +29,7 @@ export default function DeleteForm({
       />
       <button
         type='submit'
-        className='text-2xl btn btn-ghost'
+        className='max-lg:text-xl text-2xl btn btn-ghost'
       >
         🗑️
       </button>
