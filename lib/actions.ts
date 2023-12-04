@@ -6,14 +6,13 @@ import { z } from 'zod'
 import { redirect } from 'next/navigation'
 
 export async function create(formData: FormData) {
-  
   const userSchema = z.object({
     image: z.string(),
     name: z.string(),
     price: z.string(),
     rating: z.string(),
   })
-  
+
   const productData = userSchema.parse({
     image: formData.get('image'),
     name: formData.get('name'),

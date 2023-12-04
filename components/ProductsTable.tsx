@@ -12,7 +12,6 @@ import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
 import DeleteForm from '@/app/delete-form'
 
-
 const ProductsTable = async () => {
   await dbConnect()
   const products = (await ProductModel.find({}).sort({
@@ -23,7 +22,7 @@ const ProductsTable = async () => {
     <Table>
       <TableCaption>List of products</TableCaption>
       <TableHeader>
-        <TableRow >
+        <TableRow>
           <TableHead className='w-[100px] font-bold'>Image</TableHead>
           <TableHead className='font-bold '>Name</TableHead>
           <TableHead className='font-bold '>Price</TableHead>
@@ -47,7 +46,9 @@ const ProductsTable = async () => {
               </TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell>{product.price} $</TableCell>
-              <TableCell className='text-center max-sm:text-[10px]'>{product.rating}</TableCell>
+              <TableCell className='text-center max-sm:text-[10px]'>
+                {product.rating}
+              </TableCell>
               <TableCell className='text-center text-xl cursor-pointer'>
                 <DeleteForm
                   _id={product._id.toString()}

@@ -13,8 +13,7 @@ export default function DeleteForm({
     <form
       action={async (formData) => {
         const res = await deleteProduct(formData)
-        console.log(res.message);
-        
+        console.log(res.message)
       }}
     >
       <input
