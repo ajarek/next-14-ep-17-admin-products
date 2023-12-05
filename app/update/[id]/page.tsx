@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Metadata } from 'next'
-import { create } from '@/lib/actions'
+import { updateProduct } from '@/lib/actions'
 import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
 
@@ -18,9 +18,14 @@ const Update = async ({ params }: { params: { id: string } })=> {
   const product = await ProductModel.findById(id)
   return (
     <form
-      action={create}
+      action={updateProduct}
       className='p-24 max-sm:px-2 max-sm:py-4 flex flex-col justify-evenly gap-4'
     >
+      <input
+        type='hidden'
+        name='id'
+        value={id}
+      />
       <Label htmlFor='image'>Image Address</Label>
       <Input
         type='text'

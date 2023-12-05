@@ -57,20 +57,40 @@ export async function deleteProduct(formData: FormData) {
   }
 }
 
-export const updateTaskStatusAction = async ({ id,newStatus }) => {
+export const updateProduct = async (formData: FormData ) => {
+  const userSchema = z.object({
+    _id: z.string().min(1),
+    image: z.string(),
+    name: z.string(),
+    price: z.string(),
+    rating: z.string(),
+  })
+
+  const newProductData = userSchema.parse({
+    _id: formData.get('id'),
+    image: formData.get('image'),
+    name: formData.get('name'),
+    price: formData.get('price'),
+    rating: formData.get('rating'),
+  })
+  console.log(newProductData._id)
+  
   try {
     await dbConnect()
+    
+    let productId = await ProductModel.findById({ _id: newProductData._id })
 
-    const product = await ProductModel.findById(id)
+    if (!productId) throw new Error('product not found')
 
-    if (!product) throw new Error('product not found')
+    
 
-    product.completed = newStatus
-
-    await product.save()
-
+    await ProductModel.updateOne({ _id: productId }, newProductData);
+    revalidatePath('/')
     return { success: true }
   } catch (err) {
     throw err
+  }
+  finally {
+    redirect('/')
   }
 }
