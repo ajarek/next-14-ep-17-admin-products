@@ -56,3 +56,21 @@ export async function deleteProduct(formData: FormData) {
     return { message: 'Failed to delete product' }
   }
 }
+
+export const updateTaskStatusAction = async ({ id,newStatus }) => {
+  try {
+    await dbConnect()
+
+    const product = await ProductModel.findById(id)
+
+    if (!product) throw new Error('product not found')
+
+    product.completed = newStatus
+
+    await product.save()
+
+    return { success: true }
+  } catch (err) {
+    throw err
+  }
+}

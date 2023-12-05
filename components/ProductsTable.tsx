@@ -11,6 +11,7 @@ import Image from 'next/image'
 import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
 import DeleteForm from '@/app/delete-form'
+import Link from 'next/link'
 
 const ProductsTable = async () => {
   await dbConnect()
@@ -35,7 +36,8 @@ const ProductsTable = async () => {
           <TableCell colSpan={5}>No product found</TableCell>
         ) : (
           products.map((product: Product) => (
-            <TableRow key={product._id}>
+            <TableRow className='
+            ' key={product._id}>
               <TableCell className='font-medium'>
                 <Image
                   src={product.image}
@@ -49,11 +51,15 @@ const ProductsTable = async () => {
               <TableCell className='text-center max-sm:text-[10px]'>
                 {product.rating}
               </TableCell>
-              <TableCell className='text-center text-xl cursor-pointer'>
+              <TableCell >
+                <div className='flex justify-evenly items-center'>
+
+                <Link className='text-2xl ' href={`/update/${product._id}`}>🖊️</Link>
                 <DeleteForm
                   _id={product._id.toString()}
                   name={product.name}
                 />
+                </div>
               </TableCell>
             </TableRow>
           ))
