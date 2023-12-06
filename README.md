@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+<img width="300" alt="Zrzut ekranu 2023-12-06 205536" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/8cb5a47e-af63-4380-bf2c-c3ad9bab66d3">
+<img width="300" alt="Zrzut ekranu 2023-12-06 205557" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/8d1fa5b0-568d-4f3d-b31f-7b9dbdca18ee">
+<img width="300" alt="Zrzut ekranu 2023-12-06 205648" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/fbabf738-4aa3-4302-b5a4-33ecefa1d493">
+<img width="300" alt="Zrzut ekranu 2023-12-06 205710" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/193dc668-a023-4031-937d-87b3f3ce0d5d">
+<img width="150" alt="Zrzut ekranu 2023-12-06 205829" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/65f7bd40-996f-40d9-b801-e7ca6b5f36e3">
+<img width="150" alt="Zrzut ekranu 2023-12-06 205901" src="https://github.com/ajarek/next-14-ep-17-admin-products/assets/61388692/adc0b908-0482-442e-abb1-6b5c09f66509">
+
+
 ## Getting Started
 
 First, run the development server:
